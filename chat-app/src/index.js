@@ -1,11 +1,25 @@
+// Libraries:
 const path = require('path');
+const http = require('http');
 const express = require('express');
-const app = express();
+const socketio = require('socket.io');
 
+// Setup:
+const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
+
+// Global:
 const port = process.env.PORT || 3000;
 const publicDirectoryPath = path.join(__dirname, '../public');
-
 app.use(express.static(publicDirectoryPath));
-app.listen(port, () => {
+
+io.on('connection', () => {
+  console.log('WebSocket client connected...');
+})
+
+// Code:
+
+server.listen(port, () => {
   console.log(`Server is listening on port ${port}!`);
 })
