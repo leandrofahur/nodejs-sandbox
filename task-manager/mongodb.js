@@ -10,8 +10,4 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
   } 
 
   const db = client.db(dbName);
-
-  
-
-
 });
