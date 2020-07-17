@@ -10,15 +10,27 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     return console.log('Unabe to connect to the database!');
   } 
 
-  // const db = client.db(dbName);
-  // db.collection('users').insertOne({
-  //   name: "Leandro",
-  //   age: "Machado"
-  // }, (error, result) => {
-  //   if(error) {
-  //     console.log('Unable to insert user');
-  //   }
+  const db = client.db(dbName);
 
-  //   console.log(result.ops);
-  // });
+  const tasksObj = [
+    {
+      description: "Walk the dog",
+      completed: false
+    },
+    {
+      description: "Pet the cat",
+      completed: true
+    },
+    {
+      description: "Insert tasks into mongo",
+      completed: false
+    }
+  ]
+
+  db.collection('tasks').insertMany(tasksObj, (error, result) => {
+    if(error) {
+      return console.log('Unable to insert the tasks');
+    }
+    console.log(result.ops)
+  });
 });
