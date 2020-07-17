@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 mongoose.connect('mongodb://127.0.0.1:27017/tasks-manager-api', {
   useNewUrlParser: true,
@@ -8,10 +9,26 @@ mongoose.connect('mongodb://127.0.0.1:27017/tasks-manager-api', {
 // Create the task model:
 const Task = mongoose.model('Task', {
   description: {
-    type: String
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    validate(value) {
+      if(!validator.isEmail(value)) {
+        throw new Error('Email is invalid');
+      }
+    }
   },
   completed: {
-    type: Boolean
+    type: Boolean,
+    required: true
+    // validate(value) {
+    //   if(!value) {
+    //     throw new Error('A created task should be always false');
+    //   }
+    // }
   }
 });
 
@@ -19,12 +36,19 @@ const Task = mongoose.model('Task', {
 const tasks = [];
 tasks.push(new Task({
   description: 'Walk the dog',
+  email: 'dog@dog.com',
   completed: false
 }));
 tasks.push(new Task({
   description: 'Pet the cat',
-  completed: true
+  email: 'cat@cat.com',
+  completed: false
 }));
+// tasks.push(new Task({
+//   description: 'Workout',
+//   email: 'I@',
+//   completed: false
+// }));
 
 // Save the model:
 tasks.forEach(task => {
@@ -33,5 +57,4 @@ tasks.forEach(task => {
   }) .catch((error) => {
     console.log(error);
   })
-
 });
