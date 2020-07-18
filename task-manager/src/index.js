@@ -16,6 +16,21 @@ app.get('/tasks', (req, res) => {
   })
 });
 
+// Read one task:
+app.get('/tasks/:id', (req, res) => {
+  const _id = req.params.id;
+  Task.findById(_id).then((task) => {
+    if(!task) {
+      return res.status(404).send();
+    } else {
+      res.status(200).send(task);
+    }
+  }).catch(err => {
+    res.status(500).send(err);
+  })
+});
+
+// Create one task:
 app.post('/tasks', (req, res) => {
   const task = new Task(req.body);
   task.save().then(() => {
