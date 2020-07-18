@@ -10,20 +10,22 @@ mongoose.connect('mongodb://127.0.0.1:27017/tasks-manager-api', {
 const Task = mongoose.model('Task', {
   description: {
     type: String,
-    required: true
-  },
-  email: {
-    type: String,
     required: true,
-    validate(value) {
-      if(!validator.isEmail(value)) {
-        throw new Error('Email is invalid');
-      }
-    }
+    trim: true
   },
+  // email: {
+  //   type: String,
+  //   required: true,
+  //   validate(value) {
+  //     if(!validator.isEmail(value)) {
+  //       throw new Error('Email is invalid');
+  //     }
+  //   }
+  // },
   completed: {
     type: Boolean,
-    required: true
+    default: false
+    // required: true
     // validate(value) {
     //   if(!value) {
     //     throw new Error('A created task should be always false');
@@ -35,20 +37,15 @@ const Task = mongoose.model('Task', {
 // Instantiate the model:
 const tasks = [];
 tasks.push(new Task({
-  description: 'Walk the dog',
+  description: 'Walk the dog ',
   email: 'dog@dog.com',
   completed: false
 }));
 tasks.push(new Task({
   description: 'Pet the cat',
   email: 'cat@cat.com',
-  completed: false
+  completed: true
 }));
-// tasks.push(new Task({
-//   description: 'Workout',
-//   email: 'I@',
-//   completed: false
-// }));
 
 // Save the model:
 tasks.forEach(task => {
