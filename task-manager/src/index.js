@@ -22,9 +22,8 @@ app.get('/tasks/:id', (req, res) => {
   Task.findById(_id).then((task) => {
     if(!task) {
       return res.status(404).send();
-    } else {
-      res.status(200).send(task);
     }
+    res.status(200).send(task);
   }).catch(err => {
     res.status(500).send(err);
   })
