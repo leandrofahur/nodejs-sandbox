@@ -12,7 +12,7 @@ const Task = require('../src/models/task');
 
 const deleteTaskAndCount = async (id) => {
   const task = await Task.findByIdAndDelete(id);
-  if(!task) throw new Error(`There is no such task with the ${id}`);
+  if(!task) throw new Error(`There is no such task with the id: ${id}`);
   const count = await Task.countDocuments({ completed: false });
   return count;
 }

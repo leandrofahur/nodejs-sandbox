@@ -30,13 +30,14 @@ app.get('/tasks/:id', (req, res) => {
 });
 
 // Create one task:
-app.post('/tasks', (req, res) => {
+app.post('/tasks', async (req, res) => {
   const task = new Task(req.body);
-  task.save().then(() => {
+  try {
+    await task.save()
     res.status(201).send(task);
-  }). catch( err => {
+  } catch(err) {
     res.status(400).send(err);
-  })
+  }
 });
 
 app.listen(port, () => {
