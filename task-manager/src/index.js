@@ -17,16 +17,17 @@ app.get('/tasks', (req, res) => {
 });
 
 // Read one task:
-app.get('/tasks/:id', (req, res) => {
+app.get('/tasks/:id', async (req, res) => {
   const _id = req.params.id;
-  Task.findById(_id).then((task) => {
+  try {
+    const task = await Task.findById(_id);
     if(!task) {
       return res.status(404).send();
     }
     res.status(200).send(task);
-  }).catch(err => {
+  } catch(err) {
     res.status(500).send(err);
-  })
+  }
 });
 
 // Create one task:
