@@ -8,18 +8,19 @@ const port = process.env.PORT || 3000
 app.use(express.json())
 
 // Read all tasks:
-app.get('/tasks', (req, res) => {
-  Task.find({}).then((task) => {
-    res.status(200).send(task);
-  }).catch(err => {
+app.get('/tasks', async (req, res) => {
+  try {
+    const task = await Task.find({})
+    res.status(200).send(task);  
+  } catch (err) {
     res.status(500).send(err);
-  })
+  }
 });
 
 // Read one task:
 app.get('/tasks/:id', async (req, res) => {
-  const _id = req.params.id;
   try {
+    const _id = req.params.id;
     const task = await Task.findById(_id);
     if(!task) {
       return res.status(404).send();
