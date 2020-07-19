@@ -10,16 +10,12 @@ const Task = require('../src/models/task');
 //   console.log(err);
 // })
 
-const updateTaskIsCompletedToFalse = async (id, completed) => {
-  const taskCompleted = await Task.findByIdAndUpdate('5f125f72f059904d25ddffb4', { completed: false });
+const deleteTaskAndCount = async (id) => {
+  const task = await Task.findByIdAndDelete(id);
   const count = await Task.countDocuments({ complete: true });
-  return {
-    completed: taskCompleted,
-    count: count
-  };
+  return count;
 }
 
-updateTaskIsCompletedToFalse().then(res => {
-  console.log(res.completed);
-  console.log(res.count);
+deleteTaskAndCount('5f125f72f059904d25ddffb4').then(count => {
+  console.log(count);
 })
