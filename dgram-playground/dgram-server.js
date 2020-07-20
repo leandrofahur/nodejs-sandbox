@@ -16,8 +16,9 @@ socket.on('error', (err) => {
   
 socket.on('message', (message) => {
   if(message) {
-    console.log(typeof emessage);
+    console.log(message);
   }
 });  
 
 socket.bind(server.port, server.address);
+

@@ -41,3 +41,19 @@ socket.on('message', (message) => {
     }
   });
 }());
+
+// socket.send('commnad', client.port, client.address, (err, bytes) => {
+//   if(err) {
+//     console.log(err.message);
+//     socket.close();
+//   }
+// });
+
+// socket.send('streamon', client.port, client.address, (err, bytes) => {
+//   if(err) {
+//     console.log(err.message);
+//     socket.close();
+//   }
+// });
+
+
