@@ -11,5 +11,8 @@
   "dependencies": {
     "dgram": "^1.0.1",
     "stream": "0.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }

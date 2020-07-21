@@ -1,4 +1,5 @@
 const dgram = require('dgram');
+const fs = require('fs');
 const readline = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout
@@ -21,6 +22,7 @@ socket.on('error', (err) => {
 socket.on('message', (message) => {
   if(message) {
     console.log(`\nMessage: ${message}`);
+    fs.writeFileSync('./stream.txt', message);
   }
 });  
 
