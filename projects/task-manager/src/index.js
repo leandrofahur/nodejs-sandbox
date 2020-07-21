@@ -31,6 +31,7 @@ app.get('/tasks/:id', async (req, res) => {
   }
 });
 
+// Update task by id:
 app.patch('/tasks/:id', async (req, res) => {
   const updates = Object.keys(req.body);
   const allowUpdates = ['description', 'completed'];
@@ -51,6 +52,20 @@ app.patch('/tasks/:id', async (req, res) => {
     res.status(400).send(err);
   }
 })
+
+// Delete task by id:
+app.delete('/tasks/:id', async (req, res) => {
+  try {
+    const task = await Task.findByIdAndDelete(req.params.id);
+    if(!task) {
+      return res.status(404).send();
+    } else {
+      res.status(200).send(task);
+    }
+  } catch(err) {
+    res.status(500).send();
+  }
+});
 
 // Create one task:
 app.post('/tasks', async (req, res) => {
