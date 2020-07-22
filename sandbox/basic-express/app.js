@@ -8,12 +8,11 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.urlencoded());
 
-app.use('/', (req, res, next) => {
-  // console.log('This always runs!');
-  next();
+app.get('/', (req, res) => {
+  res.send('<h1>Hello from express...</h1>');
 });
 
-app.use('/add-product', (req, res, next) => {
+app.get('/add-product', (req, res, next) => {
   res.send(`
       <body>
         <h1>Insert an message</h1>
@@ -25,14 +24,8 @@ app.use('/add-product', (req, res, next) => {
     `);
 });
 
-app.use('/product', (req, res, next) => {
+app.post('/product', (req, res, next) => {
   console.log(req.body);
-  res.redirect('/');
-});
-
-app.use('/', (req, res, next) => {
-  res.send('<h1>Hello from express...</h1>');
-  next();
 });
 
 app.listen(3000, () => {
