@@ -45,10 +45,10 @@ const server = http.createServer((req, res) => {
         if(err) {
           console.log(err.message);
         }
+        res.statusCode = 302;
+        res.setHeader('Location', '/');
+        return res.end();
       });
-      res.statusCode = 302;
-      res.setHeader('Location', '/');
-      return res.end();
     });
   }
 
