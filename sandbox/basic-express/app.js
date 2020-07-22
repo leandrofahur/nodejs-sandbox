@@ -14,17 +14,19 @@ app.use('/', (req, res, next) => {
 });
 
 app.use('/add-product', (req, res, next) => {
-  res.send(`<body>
-  <h1>Insert an message</h1>
-  <form action="/product" method="POST">
-  <input type="text" name="product">
-  <button type="submit">Submit</button>
-  </form>
-  </body>`);
+  res.send(`
+      <body>
+        <h1>Insert an message</h1>
+          <form action="/product" method="POST">
+            <input type="text" name="title">
+            <button type="submit">Submit</button>
+          </form>
+      </body>
+    `);
 });
 
 app.use('/product', (req, res, next) => {
-  console.log(req.body.product);
+  console.log(req.body);
   res.redirect('/');
 });
 
