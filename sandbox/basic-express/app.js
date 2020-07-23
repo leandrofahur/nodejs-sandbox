@@ -1,9 +1,13 @@
 // Core modules:
 const http = require('http');
+const path = require('path');
 
 // Third-party modules:
 const express = require('express');
 const bodyParser = require('body-parser');
+
+// My modules:
+const rootDir = require('./util/path');
 
 // Routes:
 const adminRoutes = require('./routes/admin');
@@ -16,7 +20,7 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
-  res.status(400).send('<h1>Error</h1>');
+  res.status(404).sendFile(path.join(rootDir, 'views', '404.html'));
 });
 
 app.listen(3000, () => {
