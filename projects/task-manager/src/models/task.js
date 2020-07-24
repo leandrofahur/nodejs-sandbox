@@ -1,17 +1,15 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
+const mongoose = require('mongoose')
 
-// Create the Task model:
 const Task = mongoose.model('Task', {
-  description: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  completed: {
-    type: Boolean,
-    default: false
-  }
-});
+    description: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    completed: {
+        type: Boolean,
+        default: false
+    }
+})
 
 module.exports = Task
