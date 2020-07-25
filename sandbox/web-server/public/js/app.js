@@ -1,16 +1,19 @@
 const weatherForm = document.querySelector('form');
+const p1 = document.getElementById('p1');
+const p2 = document.getElementById('p2');
 const address = document.getElementById('address');
 
 weatherForm.addEventListener('submit', (evt) => {
-  // evt.preventDefault();
+  evt.preventDefault();
+  p1.textContent = 'Loading...';
+  p2.textContent = '';
   fetch(`http://localhost:3000/weather?address=${address.value}`).then((response) => {
     response.json().then(data => {
       if(data.error) {
-        return console.log(data.error);
+        p1.textContent = data.error;
       }
-      
-      console.log(data.location);
-      console.log(data.forecast);
+      p1.textContent = data.location;
+      p2.textContent = data.forecast;      
     });
   });
 })
