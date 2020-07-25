@@ -3,20 +3,24 @@ const path = require('path');
 
 // Third-party modules:
 const express = require('express');
-const app = express();
+const hbs = require('hbs');
 
-const viewsDirectory = path.join(__dirname, '..', 'templates');
+const app = express();
+const viewsDirectory = path.join(__dirname, '..', 'templates', 'views');
+const partialsDirectory = path.join(__dirname, '..', 'templates', 'partials');;
 
 // Handlebars setup:
 app.set('view engine', 'hbs');
 app.set('views', viewsDirectory);
+hbs.registerPartials(partialsDirectory);
 
 // Setup static directory to serve:
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/', (req, res) => {
   res.render('index', {
-    title: "Weather App"
+    title: "Weather App",
+    name: "Leandro machado"
   });
 });
 
@@ -30,6 +34,7 @@ app.get('/about', (req, res) => {
 app.get('/help', (req, res) => {
   res.render('help', {
     title: "Help",
+    name: "Leandro machado",
     message: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt, facilis exercitationem. Iusto, culpa? Inventore, consequatur."
   });
 });
