@@ -13,6 +13,8 @@ const app = express();
 const viewsDirectory = path.join(__dirname, '..', 'templates', 'views');
 const partialsDirectory = path.join(__dirname, '..', 'templates', 'partials');;
 
+const port = process.env.PORT || 3000;
+
 // Handlebars setup:
 app.set('view engine', 'hbs');
 app.set('views', viewsDirectory);
@@ -86,6 +88,6 @@ app.get('*', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log('Server is up and listening port 3000');
+app.listen(port, () => {
+  console.log(`Server is up and listening port ${port}`);
 });
