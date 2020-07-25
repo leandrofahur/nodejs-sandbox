@@ -46,8 +46,20 @@ app.get('/weather', (req, res) => {
   })
 });
 
+app.get('/help/*', (req, res) => {
+  res.render('404', {
+    title: "Help",
+    name: "Leandro machado",
+    errorMessage: 'Help article not found'
+  });
+});
+
 app.get('*', (req, res) => {
-  res.send('Error Page')
+  res.render('404', {
+    title: "Help",
+    name: "Leandro machado",
+    errorMessage: "Page not found..."
+  });
 });
 
 app.listen(3000, () => {
