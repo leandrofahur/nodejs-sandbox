@@ -1,8 +1,14 @@
+// Core modules:
+const path = require('path');
+
+// Third-party modules:
 const express = require('express');
 const app = express();
 
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
 app.get('/', (req, res) => {
-  res.send('<h1>Home Page</h1>')
+  res.sendFile('index.html');
 })
 
 app.get('/help', (req, res) => {
