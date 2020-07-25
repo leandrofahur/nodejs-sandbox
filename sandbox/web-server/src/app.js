@@ -5,6 +5,10 @@ const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
 
+// Util modules:
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
+
 const app = express();
 const viewsDirectory = path.join(__dirname, '..', 'templates', 'views');
 const partialsDirectory = path.join(__dirname, '..', 'templates', 'partials');;
@@ -45,12 +49,25 @@ app.get('/weather', (req, res) => {
       error: 'The address is required'
     })
   }
-  
-  res.send({
-    address: req.query.address,
-    forecast: "It is sunny for now",
-    location: 'Surrey'
-  })
+   
+  geocode(req.query.address, (error, data) => {
+    if(error) {
+      return res.send({
+        error
+      })
+    }
+    forecast(data.latitude, data.longitude, (error, forecastData) => {
+      if(error) {
+        return res.send({
+          error
+        })
+      }
+      res.send({
+        forecast: forecastData,
+        location: data.location
+      })
+    });
+  });
 });
 
 app.get('/help/*', (req, res) => {
