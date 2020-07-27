@@ -11,7 +11,7 @@ const forecast = require('./utils/forecast');
 
 const app = express();
 const viewsDirectory = path.join(__dirname, '..', 'templates', 'views');
-const partialsDirectory = path.join(__dirname, '..', 'templates', 'partials');;
+const partialsDirectory = path.join(__dirname, '..', 'templates', 'partials');
 
 const port = process.env.PORT || 3000;
 
